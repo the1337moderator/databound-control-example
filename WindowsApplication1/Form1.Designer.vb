@@ -29,25 +29,37 @@ Partial Class Form1
         Me.Label2 = New System.Windows.Forms.Label()
         Me.Ds1 = New WindowsApplication1.DS()
         Me.BindingSource1 = New System.Windows.Forms.BindingSource(Me.components)
+        Me.FooBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.FKfoobarBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         CType(Me.Ds1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FooBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.FKfoobarBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ListBox1
         '
+        Me.ListBox1.DataBindings.Add(New System.Windows.Forms.Binding("SelectedValue", Me.FooBindingSource, "ID", True))
+        Me.ListBox1.DataSource = Me.FooBindingSource
+        Me.ListBox1.DisplayMember = "Name"
         Me.ListBox1.FormattingEnabled = True
         Me.ListBox1.Location = New System.Drawing.Point(12, 41)
         Me.ListBox1.Name = "ListBox1"
         Me.ListBox1.Size = New System.Drawing.Size(120, 95)
         Me.ListBox1.TabIndex = 0
+        Me.ListBox1.ValueMember = "ID"
         '
         'ListBox2
         '
+        Me.ListBox2.DataBindings.Add(New System.Windows.Forms.Binding("SelectedValue", Me.FKfoobarBindingSource, "ID", True))
+        Me.ListBox2.DataSource = Me.FKfoobarBindingSource
+        Me.ListBox2.DisplayMember = "Name"
         Me.ListBox2.FormattingEnabled = True
         Me.ListBox2.Location = New System.Drawing.Point(175, 41)
         Me.ListBox2.Name = "ListBox2"
         Me.ListBox2.Size = New System.Drawing.Size(120, 95)
         Me.ListBox2.TabIndex = 1
+        Me.ListBox2.ValueMember = "ID"
         '
         'Label1
         '
@@ -77,6 +89,16 @@ Partial Class Form1
         Me.BindingSource1.DataSource = Me.Ds1
         Me.BindingSource1.Position = 0
         '
+        'FooBindingSource
+        '
+        Me.FooBindingSource.DataMember = "foo"
+        Me.FooBindingSource.DataSource = Me.BindingSource1
+        '
+        'FKfoobarBindingSource
+        '
+        Me.FKfoobarBindingSource.DataMember = "FK_foo_bar"
+        Me.FKfoobarBindingSource.DataSource = Me.FooBindingSource
+        '
         'Form1
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -90,6 +112,8 @@ Partial Class Form1
         Me.Text = "Form1"
         CType(Me.Ds1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.BindingSource1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FooBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.FKfoobarBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -100,4 +124,6 @@ Partial Class Form1
     Friend WithEvents Label2 As Label
     Friend WithEvents Ds1 As DS
     Friend WithEvents BindingSource1 As BindingSource
+    Friend WithEvents FooBindingSource As BindingSource
+    Friend WithEvents FKfoobarBindingSource As BindingSource
 End Class
